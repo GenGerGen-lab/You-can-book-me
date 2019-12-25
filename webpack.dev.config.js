@@ -61,7 +61,8 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: './src/html/index.html',
       filename: './index.html',
-      excludeChunks: ['server']
+      excludeChunks: ['server'],
+      favicon: './favicon.png'
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()

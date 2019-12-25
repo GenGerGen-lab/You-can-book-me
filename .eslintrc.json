@@ -43,6 +43,7 @@
     "react/destructuring-assignment": ["always", { "ignoreClassFields": true }],
     "jsx-a11y/label-has-associated-control": "off",
     "jsx-a11y/label-has-for": "off",
+    "react/jsx-props-no-spreading": "off",
     "node/no-extraneous-require": [
       "error",
       {
