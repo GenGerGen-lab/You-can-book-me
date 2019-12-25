@@ -1,0 +1,8 @@
+@font-face {
+  font-family: MontSerrat;
+  src: url('../fonts/montserrat.woff2') format('woff2');
+}
+
+body {
+  font-family: MontSerrat;
+}
