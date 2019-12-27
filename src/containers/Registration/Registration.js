@@ -1,5 +1,12 @@
 import React from 'react';
 
+import { Header } from '../../components/Header';
+
 export const Registration = () => {
-  return <div>Registration page</div>;
+  return (
+    <div>
+      <Header />
+      <p>Registration page</p>
+    </div>
+  );
 };
