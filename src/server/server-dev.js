@@ -5,10 +5,8 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from '../../webpack.dev.config';
 
-const app = express(),
-  DIST_DIR = __dirname,
-  HTML_FILE = path.join(DIST_DIR, 'index.html'),
-  compiler = webpack(config);
+const app = express();
+const compiler = webpack(config);
 
 app.use(
   webpackDevMiddleware(compiler, {
@@ -18,7 +16,7 @@ app.use(
 
 app.use(webpackHotMiddleware(compiler));
 
-app.get('*', (req, res, next) => {
+app.get('*', (_req, res, next) => {
   const indexFile = path.resolve(compiler.outputPath, 'index.html');
 
   compiler.outputFileSystem.readFile(indexFile, (err, result) => {
@@ -28,6 +26,7 @@ app.get('*', (req, res, next) => {
     res.set('content-type', 'text/html');
     res.send(result);
     res.end();
+    return 0;
   });
 });
 
