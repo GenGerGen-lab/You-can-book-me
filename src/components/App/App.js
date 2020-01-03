@@ -1,4 +1,5 @@
 import React from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { HomePage } from '../HomePage';
@@ -7,12 +8,14 @@ import { NotFoundPage } from '../NotFoundPage';
 
 export const App = () => {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/register" component={RegistrationPage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={HomePage} />
+          <Route path="/register" component={RegistrationPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </Router>
+    </HelmetProvider>
   );
 };

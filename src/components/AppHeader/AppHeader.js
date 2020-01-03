@@ -7,7 +7,6 @@ import Header from '../../shared/StyledHeader';
 
 const StyledLink = styled(({ ...props }) => <Link {...props} />)`
   position: absolute;
-  top: 10px;
   display: flex;
   align-items: center;
   outline: none;
