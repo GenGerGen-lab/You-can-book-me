@@ -1,19 +1,49 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
 
 import Link from '../../shared/StyledLink';
-import { H1 } from '../../shared/StyledTextHeaders';
 import Section from '../../shared/StyledSection';
 
-export const HomePage = () => {
-  return (
-    <Section>
-      <H1>Простое онлайн планирование для вашей команды</H1>
-      <div>
-        <Link to="/register">Войти в систему</Link>
-        <Link to="/register" primary>
-          Зарегистрироваться
-        </Link>
-      </div>
-    </Section>
-  );
-};
+const StyledSection = styled(Section)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #71a394;
+`;
+
+const H1 = styled.h1`
+  margin: 10px 0px;
+  color: #ecf0f1;
+  font-size: 2em;
+`;
+
+const H2 = styled.h2`
+  margin: 20px 0;
+  color: #ecf0f1;
+  font-size: 1.5em;
+`;
+
+export class HomePage extends PureComponent {
+  render() {
+    return (
+      <StyledSection>
+        <Helmet>
+          <title>Online scheduling</title>
+        </Helmet>
+        <H1>Simple online scheduling for your team</H1>
+        <H2>
+          Eliminates back and forth emails. Customer bookings straight into your
+          calendar.
+        </H2>
+        <div>
+          <Link to="/register">Login</Link>
+          <Link to="/register" primary>
+            Get started for FREE
+          </Link>
+        </div>
+      </StyledSection>
+    );
+  }
+}

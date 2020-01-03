@@ -2,9 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const StyledLink = styled(({ primary, ...props }) => (
-  <Link {...props} />
-))`
+const StyledLink = styled(({ primary, logo, ...props }) => <Link {...props} />)`
   width: auto;
   max-width: 250px;
   border: 2px solid ${props => (props.primary ? '#ef5858' : '#ecf0f1')};
@@ -17,7 +15,6 @@ export const StyledLink = styled(({ primary, ...props }) => (
   font-size: 1.225em;
   font-weight: 700;
   text-decoration: none;
-  overflow: hidden;
   white-space: nowrap;
   color: #ecf0f1;
 

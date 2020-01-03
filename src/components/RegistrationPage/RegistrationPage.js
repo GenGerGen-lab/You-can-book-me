@@ -1,23 +1,44 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
 
 import { AppHeader } from '../AppHeader';
 import Fieldset from '../../shared/StyledFieldset';
 import Input from '../../shared/StyledInput';
+import Section from '../../shared/StyledSection';
+import Button from '../../shared/StyledButton';
+import Img from '../../shared/StyledButtonImage';
 
-export const RegistrationPage = () => {
-  return (
-    <div>
-      <AppHeader />
-      <Fieldset>
-        <h2>Создать аккаунт</h2>
-        <form action="/register" method="POST">
-          <Input type="text" placeholder="Enter your name" />
-          <Input type="email" placeholder="Enter your email" />
-          <Input type="password" placeholder="Enter your password" />
+import IconGoogle from '../../images/iconGoogle.png';
 
-          <input type="submit" value="Отправить" />
-        </form>
-      </Fieldset>
-    </div>
-  );
-};
+const StyledSection = styled(Section)`
+  background-color: #f6f9fb;
+`;
+
+const H2 = styled.h2`
+  margin: 0 0 20px 0;
+`;
+
+export class RegistrationPage extends PureComponent {
+  render() {
+    return (
+      <StyledSection>
+        <Helmet>
+          <title>YouCanBook.me</title>
+        </Helmet>
+        <AppHeader />
+        <Fieldset>
+          <H2>Create your account</H2>
+          <form action="/register" method="POST">
+            <Input type="email" placeholder="email@example.com" />
+
+            <Button>
+              <Img src={IconGoogle} width="20px" alt="Иконка" />
+              Sign up with Google
+            </Button>
+          </form>
+        </Fieldset>
+      </StyledSection>
+    );
+  }
+}
