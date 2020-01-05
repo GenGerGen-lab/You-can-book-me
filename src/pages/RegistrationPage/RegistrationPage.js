@@ -2,15 +2,15 @@ import React, { PureComponent } from 'react';
 import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components';
 
-import { AppHeader } from '../AppHeader';
+import { AppHeader } from '../../components/AppHeader';
 import Fieldset from '../../shared/StyledFieldset';
 import Input from '../../shared/StyledInput';
 import Section from '../../shared/StyledSection';
-import Button from '../../shared/StyledButton';
+import Button, { StyledButtonLink } from '../../shared/StyledButton';
 import Img from '../../shared/StyledButtonImage';
 
-import IconGoogle from '../../images/iconGoogle.png';
-import IconEmail from '../../images/iconEmail.png';
+import IconGoogle from '../../assets/images/iconGoogle.png';
+import IconEmail from '../../assets/images/iconEmail.png';
 
 const StyledSection = styled(Section)`
   background-color: #f6f9fb;
@@ -21,13 +21,9 @@ const H2 = styled.h2`
 `;
 
 export class RegistrationPage extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isFormVisible: false
-    };
-  }
+  state = {
+    isFormVisible: false
+  };
 
   onEmailClick = () => {
     this.setState({
@@ -48,10 +44,10 @@ export class RegistrationPage extends PureComponent {
         <AppHeader />
         <Fieldset>
           <H2>Create your account</H2>
-          <Button>
+          <StyledButtonLink href="/auth/google">
             <Img src={IconGoogle} width="20px" alt="Иконка" />
             Sign up with Google
-          </Button>
+          </StyledButtonLink>
 
           {this.state.isFormVisible ? (
             <form action="register" method="POST" onSubmit={this.onFormSubmit}>

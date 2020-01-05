@@ -5,6 +5,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: {
     main: [
+      '@babel/polyfill',
       'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
       './src/index.js'
     ]
@@ -78,6 +79,10 @@ module.exports = {
         use: ['file-loader']
       },
       {
+        test: /\.pem$/,
+        use: ['file-loader']
+      },
+      {
         test: /\.svg$/,
         use: [
           {
@@ -92,7 +97,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: './src/html/index.html',
+      template: './src/assets/html/index.html',
       filename: './index.html',
       excludeChunks: ['server'],
       favicon: './favicon.png'

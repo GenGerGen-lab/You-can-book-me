@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Logo from '../../images/logo.png';
+import Logo from '../../assets/images/logo.png';
 import Header from '../../shared/StyledHeader';
 
 const StyledLink = styled(({ ...props }) => <Link {...props} />)`

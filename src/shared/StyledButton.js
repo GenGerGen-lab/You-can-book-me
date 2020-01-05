@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
+const CustomStyles = `
   width: 100%;
-  height: 30px;
+  height: 40px;
   position: relative;
   display: flex;
   align-items: center;
@@ -12,7 +12,6 @@ const StyledButton = styled.button`
   font-size: 16px;
   color: #494949;
   border-radius: 4px;
-  padding: 20px 0;
   margin: 10px 0;
   cursor: pointer;
 
@@ -24,6 +23,15 @@ const StyledButton = styled.button`
     outline: none;
     box-shadow: 0px 0px 0px 5px rgba(159, 207, 252, 0.5);
   }
+`;
+
+const StyledButton = styled.button`
+  ${CustomStyles}
+`;
+
+export const StyledButtonLink = styled.a`
+  text-decoration: none;
+  ${CustomStyles}
 `;
 
 export default StyledButton;
