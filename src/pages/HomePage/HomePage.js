@@ -38,7 +38,7 @@ export class HomePage extends PureComponent {
           calendar.
         </H2>
         <div>
-          <Link to="/register">Login</Link>
+          <Link to="/login">Login</Link>
           <Link to="/register" primary>
             Get started for FREE
           </Link>
