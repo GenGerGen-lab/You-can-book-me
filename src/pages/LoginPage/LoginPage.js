@@ -3,11 +3,15 @@ import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components';
 
 import { AppHeader } from '../../components/AppHeader';
-import Fieldset from '../../shared/StyledFieldset';
-import Input from '../../shared/StyledInput';
-import Section from '../../shared/StyledSection';
-import Button, { StyledButtonLink } from '../../shared/StyledButton';
+
 import Img from '../../shared/StyledButtonImage';
+import Fieldset from '../../shared/StyledFieldset';
+import Section from '../../shared/StyledSection';
+import {
+  StyledButton,
+  StyledButtonLink,
+  StyledInput
+} from '../../shared/StyledActiveElements';
 
 import IconGoogle from '../../assets/images/iconGoogle.png';
 import IconEmail from '../../assets/images/iconEmail.png';
@@ -25,14 +29,17 @@ export class LoginPage extends PureComponent {
     isFormVisible: false
   };
 
-  onEmailClick = () => {
+  onEmailOpen = () => {
     this.setState({
       isFormVisible: true
     });
   };
 
-  onFormSubmit = evt => {
+  onEmailSubmit = async evt => {
     evt.preventDefault();
+    const response = await fetch('/user', { method: 'GET' });
+    const result = await response.json();
+    console.log(result);
   };
 
   render() {
@@ -44,21 +51,21 @@ export class LoginPage extends PureComponent {
         <AppHeader />
         <Fieldset>
           <H2>Create your account</H2>
-          <StyledButtonLink href="/auth/google">
+          <StyledButtonLink href="/api/auth/google">
             <Img src={IconGoogle} width="20px" alt="Иконка" />
             Sign up with Google
           </StyledButtonLink>
 
           {this.state.isFormVisible ? (
-            <form action="register" method="POST" onSubmit={this.onFormSubmit}>
-              <Input type="text" placeholder="email@example.com" />
-              <Button type="submit">Sign up with Email</Button>
+            <form action="register" method="POST" onSubmit={this.onEmailSubmit}>
+              <StyledInput type="text" placeholder="email@example.com" />
+              <StyledButton type="submit">Sign up with Email</StyledButton>
             </form>
           ) : (
-            <Button onClick={this.onEmailClick}>
+            <StyledButton onClick={this.onEmailOpen}>
               <Img src={IconEmail} width="20px" alt="Icon" />
               Sign up with Email
-            </Button>
+            </StyledButton>
           )}
         </Fieldset>
       </StyledSection>
