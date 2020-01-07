@@ -35,8 +35,11 @@ export class RegistrationPage extends PureComponent {
     });
   };
 
-  onEmailSubmit = evt => {
+  onEmailSubmit = async evt => {
     evt.preventDefault();
+    const response = await fetch('/user', { method: 'GET' });
+    const result = await response.json();
+    console.log(result);
   };
 
   render() {
@@ -48,7 +51,7 @@ export class RegistrationPage extends PureComponent {
         <AppHeader />
         <Fieldset>
           <H2>Create your account</H2>
-          <StyledButtonLink href="/auth/google">
+          <StyledButtonLink href="/api/auth/google">
             <Img src={IconGoogle} width="20px" alt="Иконка" />
             Sign up with Google
           </StyledButtonLink>
