@@ -1,20 +1,57 @@
+require('babel-polyfill');
+require('dotenv').config();
+
 import path from 'path';
 import express from 'express';
+import next from 'next';
+import cookieParser from 'cookie-parser';
+import passport from 'passport';
+import { urlencoded, json } from 'body-parser';
+import cors from 'cors';
+import { connectToDatabase } from './database/connection';
+import { initialiseAuthentication } from './auth';
 
-// prettier-ignore
-const app = express(),
-            DIST_DIR = __dirname,
-            HTML_FILE = path.join(DIST_DIR, 'index.html')
+const cluster = require('cluster');
+const numCPUs = require('os').cpus().length;
 
-app.use(express.static(DIST_DIR));
+nextApp.prepare().then(async () => {
+  const app = express(),
+    DIST_DIR = __dirname,
+    HTML_FILE = path.join(DIST_DIR, 'index.html');
 
-app.get('*', (req, res) => {
-  res.sendFile(HTML_FILE);
+  app.use(urlencoded({ extended: true }));
+  app.use(json());
+  app.use(cookieParser());
+
+  app.use(cors());
+  app.use(passport.initialize());
+
+  app.use(express.static(DIST_DIR));
+
+  initialiseAuthentication(app);
+
+  app.get('*', (_req, res) => {
+    res.sendFile(HTML_FILE);
+  });
+
+  await connectToDatabase();
+
+  const PORT = process.env.PORT || 8080;
+
+  if (cluster.isMaster) {
+    console.log(`Master ${process.pid} is running`);
+
+    for (let i = 0; i < numCPUs; i += 1) {
+      cluster.fork();
+    }
+
+    cluster.on('exit', worker => {
+      console.log(`worker ${worker.process.pid} died`);
+    });
+  } else {
+    app.listen(PORT, () => {
+      console.log(`App listening to ${PORT}....`);
+      console.log('Press Ctrl+C to quit.');
+    });
+  }
 });
-
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`App listening to ${PORT}....`);
-  console.log('Press Ctrl+C to quit.');
-});
-
