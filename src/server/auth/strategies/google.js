@@ -35,8 +35,6 @@ const strategy = app => {
       })
     );
 
-    console.log(createdUser);
-
     return done(createdError, createdUser);
   };
 
