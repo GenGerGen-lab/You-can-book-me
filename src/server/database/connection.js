@@ -10,7 +10,4 @@ const connectToDatabase = async () =>
     useUnifiedTopology: true
   });
 
-// reconnectTries: Number.MAX_VALUE,
-// reconnectInterval: 500,
-
 export { connectToDatabase, connection };
