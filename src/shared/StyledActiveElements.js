@@ -20,7 +20,9 @@ const CustomStyles = `
 export const StyledInput = styled.input`
   ${CustomStyles}
   display: block;
-  border: 1.5px solid ${props => (props.invalid ? '#dc3545' : '#d7d7d7')};
+  box-sizing: border-box;
+  padding: 0 10px;
+  border: 1.2px solid ${props => (props.invalid ? '#dc3545' : '#d7d7d7')};
   background-color: ${props => (props.invalid ? '#ffe9e9' : '#ffffff')};
 
   &:focus {
