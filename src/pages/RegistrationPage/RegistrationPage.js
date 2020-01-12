@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import styled from 'styled-components';
 
 import { AppHeader } from '../../components/AppHeader';
+import { FormSeparator } from '../../components/FormSeparator';
 
 import Img from '../../shared/StyledButtonImage';
 import Fieldset from '../../shared/StyledFieldset';
@@ -55,6 +56,7 @@ export class RegistrationPage extends PureComponent {
             <Img src={IconGoogle} width="20px" alt="Иконка" />
             Sign up with Google
           </StyledButtonLink>
+          <FormSeparator />
 
           {this.state.isFormVisible ? (
             <form action="register" method="POST" onSubmit={this.onEmailSubmit}>
