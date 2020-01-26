@@ -32,6 +32,8 @@
     "no-process-exit": "off",
     "object-shorthand": "off",
     "class-methods-use-this": "off",
+    "no-return-await": "off",
+    "import/first": "off",
     "strict": "off",
     "no-alert": "off",
     "no-use-before-define": "off",
