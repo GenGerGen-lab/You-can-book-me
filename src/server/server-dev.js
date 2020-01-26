@@ -1,4 +1,4 @@
-require('babel-polyfill');
+require('regenerator-runtime/runtime');
 require('dotenv').config();
 
 import path from 'path';
@@ -10,6 +10,7 @@ import passport from 'passport';
 import { urlencoded, json } from 'body-parser';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
+import nodemailer from 'nodemailer';
 
 import config from '../../webpack.dev.config';
 import { connectToDatabase } from './database/connection';
