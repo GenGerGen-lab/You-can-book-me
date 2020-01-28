@@ -36,6 +36,7 @@
     "import/first": "off",
     "strict": "off",
     "no-alert": "off",
+    "no-else-return": "off",
     "no-use-before-define": "off",
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": "off",
