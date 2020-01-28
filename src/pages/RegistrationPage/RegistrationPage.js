@@ -16,18 +16,60 @@ import {
 
 import IconGoogle from '../../assets/images/iconGoogle.png';
 import IconEmail from '../../assets/images/iconEmail.png';
+import IconEnvelop from '../../assets/images/envelope.png';
+import IconRecomend from '../../assets/images/recomendAuth.png';
 
 const StyledSection = styled(Section)`
   background-color: #f6f9fb;
+`;
+
+const StyledCenterSection = styled(StyledSection)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: calc(100% - 60px);
 `;
 
 const H2 = styled.h2`
   margin: 0 0 20px 0;
 `;
 
+const StyledImg = styled.img`
+  margin: 20px 0;
+`;
+
+const StyledP = styled.p`
+  text-align: center;
+  line-height: 1.5;
+  color: #444;
+`;
+
+const StyledGoogleLink = styled(StyledButtonLink)`
+  margin-top: 70px;
+  &:before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: url(${IconRecomend}) left center no-repeat transparent;
+    background-size: 30%;
+  }
+`;
+
 export class RegistrationPage extends PureComponent {
   state = {
-    isFormVisible: false
+    value: '',
+    isFormVisible: false,
+    isEmailPosted: false
+  };
+
+  onEmailChange = evt => {
+    this.setState({ value: evt.target.value });
   };
 
   onEmailOpen = () => {
@@ -38,9 +80,20 @@ export class RegistrationPage extends PureComponent {
 
   onEmailSubmit = async evt => {
     evt.preventDefault();
-    const response = await fetch('/user', { method: 'GET' });
-    const result = await response.json();
+
+    const data = { value: this.state.value };
+
+    const response = await fetch('/emailVerification', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await response;
     console.log(result);
+
+    this.setState({
+      isEmailPosted: true
+    });
   };
 
   render() {
@@ -50,26 +103,48 @@ export class RegistrationPage extends PureComponent {
           <title>YouCanBook.me</title>
         </Helmet>
         <AppHeader />
-        <Fieldset>
-          <H2>Create your account</H2>
-          <StyledButtonLink href="/api/auth/google">
-            <Img src={IconGoogle} width="20px" alt="Иконка" />
-            Sign up with Google
-          </StyledButtonLink>
-          <FormSeparator />
+        {!this.state.isEmailPosted ? (
+          <Fieldset>
+            <H2>Create your account</H2>
+            <StyledGoogleLink href="/api/auth/google">
+              <Img src={IconGoogle} width="20px" alt="Иконка" />
+              Sign up with Google
+            </StyledGoogleLink>
+            <FormSeparator />
 
-          {this.state.isFormVisible ? (
-            <form action="register" method="POST" onSubmit={this.onEmailSubmit}>
-              <StyledInput type="text" placeholder="email@example.com" />
-              <StyledButton type="submit">Sign up with Email</StyledButton>
-            </form>
-          ) : (
-            <StyledButton onClick={this.onEmailOpen}>
-              <Img src={IconEmail} width="20px" alt="Icon" />
-              Sign up with Email
-            </StyledButton>
-          )}
-        </Fieldset>
+            {this.state.isFormVisible ? (
+              <form
+                action="register"
+                method="POST"
+                onSubmit={this.onEmailSubmit}
+              >
+                <StyledInput
+                  type="email"
+                  onChange={this.onEmailChange}
+                  placeholder="email@example.com"
+                  value={this.state.value}
+                  required
+                />
+                <StyledButton type="submit">Sign up</StyledButton>
+              </form>
+            ) : (
+              <StyledButton onClick={this.onEmailOpen}>
+                <Img src={IconEmail} width="20px" alt="Icon" />
+                Sign up with Email
+              </StyledButton>
+            )}
+          </Fieldset>
+        ) : (
+          <StyledCenterSection>
+            <StyledImg src={IconEnvelop} alt="Icon" />
+            <h2>You&apos;ve got mail</h2>
+            <StyledP>
+              To complete your registration with YouCanBook.me, please
+              <br />
+              check your email and follow the link.
+            </StyledP>
+          </StyledCenterSection>
+        )}
       </StyledSection>
     );
   }
