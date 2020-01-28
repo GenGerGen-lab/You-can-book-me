@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Logo from '../../assets/images/logo.png';
+import '../../assets/images/logoColor.png';
 import Header from '../../shared/StyledHeader';
 
 const StyledLink = styled(({ ...props }) => <Link {...props} />)`
