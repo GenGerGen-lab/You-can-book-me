@@ -9,13 +9,11 @@ import Img from '../../shared/StyledButtonImage';
 import Fieldset from '../../shared/StyledFieldset';
 import Section from '../../shared/StyledSection';
 import {
-  StyledButton,
   StyledButtonLink,
   StyledInput
 } from '../../shared/StyledActiveElements';
 
 import IconGoogle from '../../assets/images/iconGoogle.png';
-import IconEmail from '../../assets/images/iconEmail.png';
 
 const StyledSection = styled(Section)`
   background-color: #f6f9fb;
@@ -49,7 +47,9 @@ export class LoginPage extends PureComponent {
           <FormSeparator />
           <form action="register" method="POST" onSubmit={this.onEmailSubmit}>
             <StyledInput type="text" placeholder="email@example.com" />
-            <StyledButton type="submit">Login</StyledButton>
+            <StyledButtonLink type="submit" href="/createUser">
+              Login
+            </StyledButtonLink>
           </form>
         </Fieldset>
       </StyledSection>
