@@ -4,6 +4,7 @@ const Header = styled.header`
   width: 100%;
   height: 50px;
   display: flex;
+  position: fixed;
   justify-content: center;
   align-items: center;
   background-color: #71a394;

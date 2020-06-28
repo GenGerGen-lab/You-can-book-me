@@ -5,7 +5,7 @@ const StyledFieldset = styled.fieldset`
   background-color: #fff;
   width: 90%;
   max-width: 300px;
-  margin-top: 50px;
+  margin-top: 75px;
   padding: 50px;
   position: relative;
   left: 50%;
