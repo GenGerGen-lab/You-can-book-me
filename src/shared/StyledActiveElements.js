@@ -37,6 +37,11 @@ export const StyledButton = styled.button`
   justify-content: center;
   cursor: pointer;
 
+  &.primary {
+    background-color: #317297;
+    color: #ffffff;
+  }
+
   &:hover {
     filter: brightness(0.95);
   }
