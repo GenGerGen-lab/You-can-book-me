@@ -1,4 +1,4 @@
-require('babel-polyfill');
+require('regenerator-runtime/runtime');
 require('dotenv').config();
 
 import path from 'path';

@@ -14,8 +14,9 @@ const strategy = app => {
     callbackURL: `${process.env.SERVER_API_URL}/auth/google/callback`
   };
 
-  const verifyCallback = async (accessToken, refreshToken, profile, done) => {
-    let [err, user] = await to(getUserByProviderId(profile.id));
+  const verifyCallback = async (_accessToken, _refreshToken, profile, done) => {
+    const [err, user] = await to(getUserByProviderId(profile.id));
+
     if (err || user) {
       return done(err, user);
     }

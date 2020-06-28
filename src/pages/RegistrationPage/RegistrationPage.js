@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { AppHeader } from '../../components/AppHeader';
 import { FormSeparator } from '../../components/FormSeparator';
+import { Spiner } from '../../components/Spiner';
 
 import Img from '../../shared/StyledButtonImage';
 import Fieldset from '../../shared/StyledFieldset';
@@ -65,7 +66,8 @@ export class RegistrationPage extends PureComponent {
   state = {
     value: '',
     isFormVisible: false,
-    isEmailPosted: false
+    isEmailPosted: false,
+    isEmailPosting: false
   };
 
   onEmailChange = evt => {
@@ -83,13 +85,15 @@ export class RegistrationPage extends PureComponent {
 
     const data = { value: this.state.value };
 
-    const response = await fetch('/emailVerification', {
+    this.setState({
+      isEmailPosting: true
+    });
+
+    await fetch('/createAccount', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
-    const result = await response;
-    console.log(result);
 
     this.setState({
       isEmailPosted: true
@@ -104,36 +108,42 @@ export class RegistrationPage extends PureComponent {
         </Helmet>
         <AppHeader />
         {!this.state.isEmailPosted ? (
-          <Fieldset>
-            <H2>Create your account</H2>
-            <StyledGoogleLink href="/api/auth/google">
-              <Img src={IconGoogle} width="20px" alt="Иконка" />
-              Sign up with Google
-            </StyledGoogleLink>
-            <FormSeparator />
+          <div>
+            {!this.state.isEmailPosting ? (
+              <Fieldset>
+                <H2>Create your account</H2>
+                <StyledGoogleLink href="/api/auth/google">
+                  <Img src={IconGoogle} width="20px" alt="Иконка" />
+                  Sign up with Google
+                </StyledGoogleLink>
+                <FormSeparator />
 
-            {this.state.isFormVisible ? (
-              <form
-                action="register"
-                method="POST"
-                onSubmit={this.onEmailSubmit}
-              >
-                <StyledInput
-                  type="email"
-                  onChange={this.onEmailChange}
-                  placeholder="email@example.com"
-                  value={this.state.value}
-                  required
-                />
-                <StyledButton type="submit">Sign up</StyledButton>
-              </form>
+                {this.state.isFormVisible ? (
+                  <form
+                    action="register"
+                    method="POST"
+                    onSubmit={this.onEmailSubmit}
+                  >
+                    <StyledInput
+                      type="email"
+                      onChange={this.onEmailChange}
+                      placeholder="email@example.com"
+                      value={this.state.value}
+                      required
+                    />
+                    <StyledButton type="submit">Sign up</StyledButton>
+                  </form>
+                ) : (
+                  <StyledButton onClick={this.onEmailOpen}>
+                    <Img src={IconEmail} width="20px" alt="Icon" />
+                    Sign up with Email
+                  </StyledButton>
+                )}
+              </Fieldset>
             ) : (
-              <StyledButton onClick={this.onEmailOpen}>
-                <Img src={IconEmail} width="20px" alt="Icon" />
-                Sign up with Email
-              </StyledButton>
+              <Spiner />
             )}
-          </Fieldset>
+          </div>
         ) : (
           <StyledCenterSection>
             <StyledImg src={IconEnvelop} alt="Icon" />
